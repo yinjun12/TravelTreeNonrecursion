@@ -1,0 +1,33 @@
+recursion:
+void preOrderTravel(TreeNode *root)//preorder a tree with recursion
+{
+	if (root)
+	{
+		cout << root->val << " ";
+		preOrderTravel(root->left);
+		preOrderTravel(root->right);
+	}
+}
+non-recursion:
+void preOrderTravelNonrecursion(TreeNode *root)//preorder with non-recursion
+{
+	vector<TreeNode *>preorder;
+	preorder.push_back(root);
+	while (!preorder.empty())
+	{
+		TreeNode *p = preorder.back();
+		while (p)
+		{
+			cout << p->val << " ";
+			p = p->left;
+			preorder.push_back(p);
+		}
+		preorder.pop_back();//remove NULL ptr
+		if (!preorder.empty())
+		{
+			p = preorder.back();
+			preorder.pop_back();
+			preorder.push_back(p->right);
+		}
+	}
+}
